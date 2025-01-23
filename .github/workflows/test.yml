@@ -6,7 +6,7 @@ on:
       [main, develop]
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   format-lint-test:
