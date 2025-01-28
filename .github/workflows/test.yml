@@ -6,6 +6,7 @@ on:
   pull_request:
     branches:
       - master
+      - /feat/af/get,post,del-playwright-homework-9
 
 jobs:
   format-lint-test:
