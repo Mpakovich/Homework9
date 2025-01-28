@@ -21,3 +21,7 @@ Post /loan-calc/decision endpoint checklist
 | 5 | Negative decision due to missing fields "400" | Pass   |
 | 6 |Negative decision due to invalid data types "400" | Pass   |
 | 7 |Negative decision with random negative age using Math.floor "400" | Pass   |
+
+Fixes:
+- [x] Moving Lesson-9+Homework9 in folder api-hw9 for better review
+- [x] Added Response status for all test cases in Homework 10.
