@@ -10,6 +10,7 @@ import { StatusCodes } from 'http-status-codes';
         });
         const responseBody = await response.json();
 
+        console.log('Response status:', response.status());
         expect.soft(response.status()).toBe(StatusCodes.OK);
         expect.soft(responseBody.riskDecision).toBe('positive');
         expect.soft(responseBody.riskLevel).toBe('Low Risk');
@@ -23,6 +24,7 @@ import { StatusCodes } from 'http-status-codes';
             data: requestBody,
         });
         const responseBody = await response.json();
+        console.log('Response status:', response.status());
 
         expect.soft(response.status()).toBe(StatusCodes.OK);
         expect.soft(responseBody.riskDecision).toBe('positive');
@@ -38,6 +40,7 @@ import { StatusCodes } from 'http-status-codes';
         });
         const responseBody = await response.json();
 
+        console.log('Response status:', response.status());
         expect.soft(response.status()).toBe(StatusCodes.OK);
         expect.soft(responseBody.riskDecision).toBe('negative');
         expect.soft(responseBody.riskLevel).toBe('Very High Risk');
@@ -50,6 +53,7 @@ import { StatusCodes } from 'http-status-codes';
             data: requestBody,
         });
 
+        console.log('Response status:', response.status());
         expect.soft(response.status()).toBe(StatusCodes.BAD_REQUEST); //must be code status 400, but we get 200
     });
 
@@ -60,6 +64,7 @@ import { StatusCodes } from 'http-status-codes';
             data: requestBody,
         });
 
+        console.log('Response status:', response.status());
         expect.soft(response.status()).toBe(StatusCodes.BAD_REQUEST);
     });
 
@@ -77,6 +82,7 @@ import { StatusCodes } from 'http-status-codes';
             data: requestBody,
         });
 
+        console.log('Response status:', response.status());
         expect.soft(response.status()).toBe(StatusCodes.BAD_REQUEST);
     });
 
