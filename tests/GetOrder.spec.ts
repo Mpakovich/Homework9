@@ -41,7 +41,7 @@ test('GET should return 429 Too Many Requests after multiple requests', async ({
   let tooManyRequestsReceived = false
 
   for (let r = 0; r < MAX_REQUESTS; r++) {
-    // This test sends 100 consecutive requests to the specified URL,in other words we send requests in a loop to exceed the limit
+    // This test sends 100 consecutive requests to the specified URL,in other words, we send requests in a loop to exceed the limit
     const response = await request.get('https://backend.tallinn-learning.ee/test-orders/1')
     console.log(`Request ${r + 1} status:`, response.status())
 
@@ -56,8 +56,11 @@ test('GET should return 429 Too Many Requests after multiple requests', async ({
   // Check if there was at least one response with 429
   if (!tooManyRequestsReceived) {
     console.error('Test failed: Server did not return 429 Too Many Requests after xxx requests.')
-    expect(tooManyRequestsReceived).toBe(false) // true -> We are clearly failing the test, false -> system show for us error message
   }
+
+  // У каждого теста должен быть понятный критерий DoD - Definition of Done, в нашем случае - должен быть понятный expect.
+  // Тест должен проходить или падать от tooManyRequestsReceived.
+  expect(tooManyRequestsReceived).toBe(true) // true -> We are clearly failing the test, false -> system shows error message
 })
 
 //Lesson 9
