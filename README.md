@@ -27,4 +27,3 @@ Fixes:
 - [x] Moving Lesson-9+Homework9 in folder api-hw9 for better review
 - [x] Added Response status for all test cases in Homework 10.
 - [x] Added one more TC
-- [x] Now all lines are terminated with semicolons and the code will be standard compliant. 
