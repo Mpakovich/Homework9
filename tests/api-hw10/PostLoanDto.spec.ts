@@ -71,12 +71,12 @@ test('Negative decision due to invalid age', async ({ request }) => {
 
 // 5. Негативный сценарий: пропущены обязательные поля
 test('Negative decision due to missing fields', async ({ request }) => {
-  const requestBody = { income: 20000 } // Пропущены другие поля
+  const requestBody = new LoanRequestDTO(20000, 0, 30, true, 0, 12) // Пропущены другие поля
   const response = await request.post(
-    'https://backend.tallinn-learning.ee/api/loan-calc/decision',
-    {
-      data: requestBody,
-    },
+      'https://backend.tallinn-learning.ee/api/loan-calc/decision',
+      {
+        data: requestBody,
+      },
   )
 
   console.log('Response status:', response.status())
@@ -85,19 +85,16 @@ test('Negative decision due to missing fields', async ({ request }) => {
 
 // 6. Негативный сценарий: неверные типы данных
 test('Negative decision due to invalid data types', async ({ request }) => {
-  const requestBody = {
-    income: 20000,
-    debt: 0,
-    age: 'value', // Неверный тип
-    employed: true,
-    loanAmount: true, // Неверный тип
-    loanPeriod: 12,
-  }
+  const requestBody = new LoanRequestDTO(20000, 0, 30, true, 500, 12)
+  // Here we manually set incorrect types for some fields
+  requestBody.age = 'value' as unknown as number  // Неверный тип
+  requestBody.loanAmount = true as unknown as number  // Неверный тип
+
   const response = await request.post(
-    'https://backend.tallinn-learning.ee/api/loan-calc/decision',
-    {
-      data: requestBody,
-    },
+      'https://backend.tallinn-learning.ee/api/loan-calc/decision',
+      {
+        data: requestBody,
+      },
   )
 
   console.log('Response status:', response.status())
@@ -114,21 +111,14 @@ test('Negative decision with random negative age using Math.floor', async ({ req
   const randomLoanPeriod = Math.floor(Math.random() * 5) // Период займа от 0 до 4 месяцев
 
   // Создаем тело запроса
-  const requestBody = {
-    income: randomIncome,
-    debt: randomDebt,
-    age: randomAge, // Используем отрицательное значение возраста
-    employed: true, // Считаем, что клиент работает
-    loanAmount: randomLoanAmount,
-    loanPeriod: randomLoanPeriod,
-  }
+  const requestBody = new LoanRequestDTO(randomIncome, randomDebt, randomAge, true, randomLoanAmount, randomLoanPeriod)
 
   // Отправляем POST-запрос
   const response = await request.post(
-    'https://backend.tallinn-learning.ee/api/loan-calc/decision',
-    {
-      data: requestBody,
-    },
+      'https://backend.tallinn-learning.ee/api/loan-calc/decision',
+      {
+        data: requestBody,
+      },
   )
 
   // Логируем статус ответа
@@ -141,12 +131,12 @@ test('Negative decision with random negative age using Math.floor', async ({ req
 
 // 8. Негативный сценарий: пропущены обязательные поля: debt, employed
 test('Negative decision due to missing debt, employed fields ', async ({ request }) => {
-  const requestBody = { income: 20000, age: 6, loanAmount: 500, loanPeriod: 9 } // Пропущены другие поля
+  const requestBody = new LoanRequestDTO(20000, 0, 30, false, 500, 12) // Пропущены другие поля
   const response = await request.post(
-    'https://backend.tallinn-learning.ee/api/loan-calc/decision',
-    {
-      data: requestBody,
-    },
+      'https://backend.tallinn-learning.ee/api/loan-calc/decision',
+      {
+        data: requestBody,
+      },
   )
 
   console.log('Response status:', response.status())
