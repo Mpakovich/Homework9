@@ -6,10 +6,10 @@ import { StatusCodes } from 'http-status-codes'
 test('Positive decision with Low Risk', async ({ request }) => {
   const requestBody = LoanRequestDTO.createValidLowRisk()
   const response = await request.post(
-      'https://backend.tallinn-learning.ee/api/loan-calc/decision',
-      {
-        data: requestBody,
-      },
+    'https://backend.tallinn-learning.ee/api/loan-calc/decision',
+    {
+      data: requestBody,
+    },
   )
   const responseBody = await response.json()
 
@@ -24,10 +24,10 @@ test('Positive decision with Low Risk', async ({ request }) => {
 test('Positive decision with Medium Risk', async ({ request }) => {
   const requestBody = LoanRequestDTO.createValidMediumRisk()
   const response = await request.post(
-      'https://backend.tallinn-learning.ee/api/loan-calc/decision',
-      {
-        data: requestBody,
-      },
+    'https://backend.tallinn-learning.ee/api/loan-calc/decision',
+    {
+      data: requestBody,
+    },
   )
   const responseBody = await response.json()
   console.log('Response status:', response.status())
@@ -42,10 +42,10 @@ test('Positive decision with Medium Risk', async ({ request }) => {
 test('Negative decision due to High Risk', async ({ request }) => {
   const requestBody = LoanRequestDTO.createHighRisk()
   const response = await request.post(
-      'https://backend.tallinn-learning.ee/api/loan-calc/decision',
-      {
-        data: requestBody,
-      },
+    'https://backend.tallinn-learning.ee/api/loan-calc/decision',
+    {
+      data: requestBody,
+    },
   )
   const responseBody = await response.json()
 
@@ -59,10 +59,10 @@ test('Negative decision due to High Risk', async ({ request }) => {
 test('Negative decision due to invalid age', async ({ request }) => {
   const requestBody = new LoanRequestDTO(20000, 0, 16, true, 500, 12)
   const response = await request.post(
-      'https://backend.tallinn-learning.ee/api/loan-calc/decision',
-      {
-        data: requestBody,
-      },
+    'https://backend.tallinn-learning.ee/api/loan-calc/decision',
+    {
+      data: requestBody,
+    },
   )
 
   console.log('Response status:', response.status())
@@ -73,10 +73,10 @@ test('Negative decision due to invalid age', async ({ request }) => {
 test('Negative decision due to missing fields', async ({ request }) => {
   const requestBody = new LoanRequestDTO(20000, 0, 30, true, 0, 12) // Пропущены другие поля
   const response = await request.post(
-      'https://backend.tallinn-learning.ee/api/loan-calc/decision',
-      {
-        data: requestBody,
-      },
+    'https://backend.tallinn-learning.ee/api/loan-calc/decision',
+    {
+      data: requestBody,
+    },
   )
 
   console.log('Response status:', response.status())
@@ -87,14 +87,14 @@ test('Negative decision due to missing fields', async ({ request }) => {
 test('Negative decision due to invalid data types', async ({ request }) => {
   const requestBody = new LoanRequestDTO(20000, 0, 30, true, 500, 12)
   // Здесь мы вручную задаем неправильные типы для некоторых полей
-  requestBody.age = 'value' as unknown as number  // Неверный тип
-  requestBody.loanAmount = true as unknown as number  // Неверный тип
+  requestBody.age = 'value' as unknown as number // Неверный тип
+  requestBody.loanAmount = true as unknown as number // Неверный тип
 
   const response = await request.post(
-      'https://backend.tallinn-learning.ee/api/loan-calc/decision',
-      {
-        data: requestBody,
-      },
+    'https://backend.tallinn-learning.ee/api/loan-calc/decision',
+    {
+      data: requestBody,
+    },
   )
 
   console.log('Response status:', response.status())
@@ -111,14 +111,21 @@ test('Negative decision with random negative age using Math.floor', async ({ req
   const randomLoanPeriod = Math.floor(Math.random() * 5) // Период займа от 0 до 4 месяцев
 
   // Создаем тело запроса
-  const requestBody = new LoanRequestDTO(randomIncome, randomDebt, randomAge, true, randomLoanAmount, randomLoanPeriod)
+  const requestBody = new LoanRequestDTO(
+    randomIncome,
+    randomDebt,
+    randomAge,
+    true,
+    randomLoanAmount,
+    randomLoanPeriod,
+  )
 
   // Отправляем POST-запрос
   const response = await request.post(
-      'https://backend.tallinn-learning.ee/api/loan-calc/decision',
-      {
-        data: requestBody,
-      },
+    'https://backend.tallinn-learning.ee/api/loan-calc/decision',
+    {
+      data: requestBody,
+    },
   )
 
   // Логируем статус ответа
@@ -133,10 +140,10 @@ test('Negative decision with random negative age using Math.floor', async ({ req
 test('Negative decision due to missing debt, employed fields ', async ({ request }) => {
   const requestBody = new LoanRequestDTO(20000, 0, 30, false, 500, 12) // Пропущены другие поля
   const response = await request.post(
-      'https://backend.tallinn-learning.ee/api/loan-calc/decision',
-      {
-        data: requestBody,
-      },
+    'https://backend.tallinn-learning.ee/api/loan-calc/decision',
+    {
+      data: requestBody,
+    },
   )
 
   console.log('Response status:', response.status())
