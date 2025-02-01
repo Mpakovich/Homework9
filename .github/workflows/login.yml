@@ -6,7 +6,7 @@ on:
       [master, develop]
   pull_request:
     branches:
-      - master
+      - feat/af/DTO-test-homework-10
 
 jobs:
   format-lint-test:
