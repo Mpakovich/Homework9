@@ -2,11 +2,10 @@ name: Check formatting, linting, and run tests
 
 on:
   push:
-    branches:
-      [main, develop]
+    branches: [main, develop]
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   format-lint-test:
@@ -26,20 +25,20 @@ jobs:
 
       - name: Run Prettier check
         run: |
-            echo "Running Prettier to check for formatting issues..."
-            npm run prettier:check
+          echo "Running Prettier to check for formatting issues..."
+          npm run prettier:check
 
       - name: Run ESLint check
         run: |
-            echo "Running ESLint to check for linting issues..."
-            npm run lint 
+          echo "Running ESLint to check for linting issues..."
+          npm run lint
 
       - name: Run TypeScript compile check
         run: |
           echo "Running TypeScript compiler to check for type issues..."
-          npx tsc --noEmit
+          npx tsc --noEmit          
 
       - name: Run Playwright API tests
         run: |
           echo "Running Playwright to execute API tests..."
-          npx playwright test    
+          npx playwright test
