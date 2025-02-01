@@ -4,9 +4,9 @@ on:
   push:
     branches:
       - feat/af/DTO-test-homework-10
+      - feat/af/Lesson11
   pull_request:
     branches:
-      - feat/af/DTO-test-homework-10
       - feat/af/Lesson11
 
 jobs:
