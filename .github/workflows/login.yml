@@ -3,10 +3,12 @@ name: Login tests
 on:
   push:
     branches:
+      - master
       - feat/af/DTO-test-homework-10
       - feat/af/Lesson11
   pull_request:
     branches:
+      - master
       - feat/af/Lesson11
 
 jobs:
