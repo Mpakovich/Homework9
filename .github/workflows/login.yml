@@ -3,10 +3,10 @@ name: Login tests
 on:
   push:
     branches:
-      - feat/af/DTO-test-homework-10
+      [master, develop]
   pull_request:
     branches:
-      - feat/af/DTO-test-homework-10
+      - master
 
 jobs:
   format-lint-test:
@@ -45,4 +45,4 @@ jobs:
           PASSWORD: ${{ secrets.PASSWORD }}
         run: |
           echo "Running Playwright to execute API tests..."
-          npx playwright test tests/login.spec.ts
+          npx playwright test
