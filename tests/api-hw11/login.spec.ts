@@ -11,7 +11,6 @@ test.describe('Login tests', async () => {
     console.log(await response.text())
     expect(response.status()).toBe(StatusCodes.OK)
 
-    // Проверка JWT с использованием expect
     expect(await response.text()).toMatch(/^eyJhb[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+$/)
   })
 
