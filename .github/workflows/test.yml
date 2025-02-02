@@ -36,7 +36,7 @@ jobs:
       - name: Run TypeScript compile check
         run: |
           echo "Running TypeScript compiler to check for type issues..."
-          npx tsc --noEmit
+          npx tsc --noEmit          
 
       - name: Run Playwright API tests
         run: |
