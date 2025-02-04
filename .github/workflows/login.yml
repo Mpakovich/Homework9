@@ -1,11 +1,13 @@
-name: Check formatting, linting, and run tests
+name: Login tests
 
 on:
   push:
-    branches: [develop, master]
+    branches:
+      - feat/af/DTO-test-homework-10
+      - feat/af/Lesson11
   pull_request:
     branches:
-      - master
+      - feat/af/Lesson11
 
 jobs:
   format-lint-test:
@@ -31,14 +33,17 @@ jobs:
       - name: Run ESLint check
         run: |
           echo "Running ESLint to check for linting issues..."
-          npm run lint
+          npm run lint 
 
       - name: Run TypeScript compile check
         run: |
           echo "Running TypeScript compiler to check for type issues..."
-          npx tsc --noEmit          
+          npx tsc --noEmit
 
       - name: Run Playwright API tests
+        env:
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
         run: |
           echo "Running Playwright to execute API tests..."
-          npx playwright test
+          npx playwright test tests/api-hw11/login.spec.ts
