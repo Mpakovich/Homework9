@@ -23,12 +23,7 @@ export class OrderDto {
   }
 
   static generateRandomOrderDto(): OrderDto {
-    return new OrderDto(
-      'OPEN',
-      'David',
-      `4852345235${Math.floor(Math.random() * 10)}`,
-      'no comment',
-    )
+    return new OrderDto('OPEN', 'David', `485${Math.floor(Math.random() * 10)}`, 'no comment')
   }
 
   static generateOrderDtoWithoutStatus(): OrderDto {
@@ -36,7 +31,14 @@ export class OrderDto {
   }
 
   static generateEmptyOrderDto(): any {
-    return {}
+    return {
+      comment: undefined,
+      courierId: undefined,
+      customerName: undefined,
+      customerPhone: undefined,
+      id: undefined,
+      status: undefined,
+    }
   }
 
   static serializeResponse(json: any): OrderDto {
