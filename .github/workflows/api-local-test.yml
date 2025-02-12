@@ -44,6 +44,7 @@ jobs:
         run: |
           echo "Running Playwright to execute empty user tests..."
           npx playwright test tests/emptyUser.spec.ts --workers=1
+
       - name: Run Playwright API tests
         run: |
           echo "Running Playwright to execute local API tests..."
