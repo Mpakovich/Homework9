@@ -13,4 +13,3 @@ test('TL-14-5 del and get empty array all users test', async ({ request }) => {
 
   expect(json.length).toBe(0)
 })
-
