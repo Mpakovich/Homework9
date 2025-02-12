@@ -1,11 +1,10 @@
-name: Check formatting, linting, and run tests
+name: Api local tests
 
 on:
   push:
-    branches: [develop, master]
-#  pull_request:
-#    branches:
-#      - master
+    branches: [master, develop]
+  pull_request:
+    branches: [master]
 
 jobs:
   format-lint-test:
@@ -27,18 +26,26 @@ jobs:
         run: |
           echo "Running Prettier to check for formatting issues..."
           npm run prettier:check
-
       - name: Run ESLint check
         run: |
           echo "Running ESLint to check for linting issues..."
           npm run lint
-
       - name: Run TypeScript compile check
         run: |
           echo "Running TypeScript compiler to check for type issues..."
-          npx tsc --noEmit          
+          npx tsc --noEmit
+      - name: Set up Docker Compose
+        uses: hoverkraft-tech/compose-action@v2.0.1
+        with:
+          compose-file: ./docker-compose.yaml
+          up-flags: -d
+
+      - name: Run Playwright Api empty user test
+        run: |
+          echo "Running Playwright to execute empty user tests..."
+          npx playwright test tests/local-hm13/emptyUser.spec.ts --workers=1
 
       - name: Run Playwright API tests
         run: |
-          echo "Running Playwright to execute API tests..."
-          npx playwright test
+          echo "Running Playwright to execute local API tests..."
+          npx playwright test tests/local-hm13/User.Api.spec.ts --workers=1

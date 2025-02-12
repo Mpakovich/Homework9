@@ -1,12 +1,12 @@
-name: Login tests
+name: LoginGetDeleteOrder
 
 on:
   push:
     branches:
       [master, develop]
-  pull_request:
-    branches:
-      - master
+  #pull_request:
+   # branches:
+    #  - master
 
 jobs:
   format-lint-test:
@@ -45,4 +45,4 @@ jobs:
           PASSWORD: ${{ secrets.PASSWORD }}
         run: |
           echo "Running Playwright to execute API tests..."
-          npx playwright test tests/Login2.spec.ts
+          npx playwright test tests/api-tl12/LoginGetDeleteOrder.spec.ts
