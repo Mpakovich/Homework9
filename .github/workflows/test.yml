@@ -3,9 +3,9 @@ name: Check formatting, linting, and run tests
 on:
   push:
     branches: [develop, master]
-  pull_request:
-    branches:
-      - master
+#  pull_request:
+#    branches:
+#      - master
 
 jobs:
   format-lint-test:
